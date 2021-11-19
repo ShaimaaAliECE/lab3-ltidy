@@ -6,10 +6,12 @@ const newConnection = require('./DBConnection');
 
 const app = express();
 
+// an http method function
 app.get('/', (req, res) => {
     res.sendFile('/static/index.html', { root: __dirname })
   })
 
+  // to be able to access the body of the request
 app.use(express.urlencoded({
   extended: true
 }))
@@ -22,6 +24,7 @@ app.get('/admin', (req, res) => {
   res.sendFile('/static/admin.html', { root: __dirname })
 })
 
+// login info for front end
 app.post('/login', (req, res) => {
   let userName = req.body.usr;
   let password = req.body.pwd;
@@ -35,6 +38,7 @@ app.post('/login', (req, res) => {
   res.send(message)
 })
 
+// login info for static end
 app.get('/login', (req, res) => {
   let userName = req.body.usr;
   let password = req.body.pwd;
@@ -48,6 +52,7 @@ app.get('/login', (req, res) => {
   res.send(message)
 })
 
+// in users insert the user values
 app.get('/add-user', (req,res) => {
   let conn = newConnection();
   conn.connect();
@@ -60,6 +65,7 @@ app.get('/add-user', (req,res) => {
   conn.end();
 })
 
+// in times insert the time values
 app.get('/add-times', (req,res) => {
   let conn = newConnection();
   conn.connect();
